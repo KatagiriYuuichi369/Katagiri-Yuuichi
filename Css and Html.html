@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health and Wellness Blogs</title>
+    <link rel="websiteicon" href="image/bmw.jpg">
+</head>
+
+<body>
+
+    <script>
+        // Smooth Scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    
+        // Back to Top Button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.innerText = '↑';
+        backToTopBtn.style.position = 'fixed';
+        backToTopBtn.style.bottom = '20px';
+        backToTopBtn.style.right = '20px';
+        backToTopBtn.style.padding = '10px';
+        backToTopBtn.style.border = 'none';
+        backToTopBtn.style.borderRadius = '50%';
+        backToTopBtn.style.backgroundColor = 'red';
+        backToTopBtn.style.color = 'white';
+        backToTopBtn.style.cursor = 'pointer';
+        backToTopBtn.style.display = 'none';
+        document.body.appendChild(backToTopBtn);
+    
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+    
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    
+        // Blog Filtering/Search
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Search PDFs...';
+        searchInput.style.padding = '10px';
+        searchInput.style.margin = '20px 0';
+        searchInput.style.width = '300px';
+        searchInput.style.borderRadius = '5px';
+        searchInput.style.border = '1px solid #ccc';
+        document.querySelector('.blogs-section').prepend(searchInput);
+    
+        searchInput.addEventListener('input', () => {
+            const searchText = searchInput.value.toLowerCase();
+            document.querySelectorAll('.blog-card').forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(searchText)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+.header {
+    height: 70vh;
+    background: url('image/31.jpg') no-repeat center center/cover;
+    position: relative;
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: red;
+}
+
+.logo span {
+    color: red;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    text-align: center;
+}
+
+.hero-content p {
+    margin-top: 10px;
+    font-size: 1.2em;
+    text-align: center;
+}
+.hero-content a {
+    align-items: center;
+}
+.blom{
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 1.2em;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    margin-left: 117px;
+
+}
+.blom:hover {
+    transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .blom::before, .blom::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: -100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    .blom:hover::before {
+        left: 100%;
+    }
+
+/* Blogs Section */
+.blogs-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px 20px;
+    gap: 20px;
+}
+
+.blog-card {
+    width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card img {
+    width: 100%;
+    border-bottom: 4px solid red;
+}
+
+.blog-card h3 {
+    padding: 15px;
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+}
+
+.blog-card p {
+    padding: 0 15px 15px;
+    color: #555;
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    margin: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 0;
+    transition: 0.3s;
+}
+
+.btn:hover::before {
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #d10000;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+/* Upload Section */
+.upload-section {
+    background-color: #f2f2f2;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.upload-section form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section input, .upload-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.upload-section button {
+    width: 100%;
+}
+
+mark{
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+
+mark{
+    background-color: black;
+    color: white;
+}
+
+    </style>
+<header class="header">
+        <div class="overlay">
+            <nav class="navbar">
+                <a href="Blog page.html" class="logo">Blog<span>Page</span></a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="2 blog website about page.html">About</a></li>
+                    <li><a href="Blog page.html">Blogs</a></li>
+                    <li><a href='4 contant page.html'>Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hero-content">
+                <h1>Welcome to Webdevelopment Full course</h1>
+                <p>When you read and learn this 6 you can be make your own website with coding....</p>
+            </div>
+        </div>
+</header>
+    <section id="blogs" class="blogs-section">
+
+        <div class="blog-card">
+            <img src="image/website 2 (3).jpg" alt="Silence Power">
+            <h3>Html And Css PDF No:{1}</h3>
+            <p></p>
+            <a href="Book/123 (2).pdf" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/website 2 (2).jpg" alt="Blog 2">
+            <h3>Html And Css PDF No:{2}</h3>
+            <p></p>
+            <a href="Book/123 (3).pdf" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/website 2 (1).jpg" alt="Blog 2"  >
+            <h3>Html And Css PDF No:{3}</h3>
+            <p></p>
+            <a href="Book/123 (4).pdf" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/website w.jpg" alt="Blog 2" >
+            <h3>Html And Css PDF No:{4}</h3>
+            <p></p>
+            <a href="Book/123 (6).pdf" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/website 2 (4).jpg" alt="Mind Power">
+            <h3>Html And Css PDF No:{5}</h3>
+            <p></p>
+            <a href="Book/123 (1).pdf" class="btn">Read More</a>
+        </div>
+    <div class="blog-card">
+        <img src="image/website.jpg" alt="Blog 2"  >
+        <h3>Html And Css PDF No:{6}</h3>
+        <p></p>
+        <a href="Book/123 (5).pdf" class="btn">Read More</a>
+    </div>
+        <mark>© 2024 BlogSite. All rights reserved.</mark>
+</body>
+
+</html>

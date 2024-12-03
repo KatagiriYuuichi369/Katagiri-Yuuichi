@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+    <link rel="websiteicon" href="image/bmw.jpg">
+</head>
+    <script>
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.innerText = '↑';
+    backToTopBtn.style.position = 'fixed';
+    backToTopBtn.style.bottom = '20px';
+    backToTopBtn.style.right = '20px';
+    backToTopBtn.style.padding = '10px';
+    backToTopBtn.style.border = 'none';
+    backToTopBtn.style.borderRadius = '50%';
+    backToTopBtn.style.backgroundColor = 'red';
+    backToTopBtn.style.color = 'white';
+    backToTopBtn.style.cursor = 'pointer';
+    backToTopBtn.style.display = 'none';
+
+    document.body.appendChild(backToTopBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Blog Filter/Search
+    const searchBox = document.createElement('input');
+    searchBox.type = 'text';
+    searchBox.placeholder = 'Search blogs...';
+    searchBox.style.marginBottom = '20px';
+    searchBox.style.padding = '10px';
+    searchBox.style.width = '300px';
+    searchBox.style.borderRadius = '5px';
+    searchBox.style.border = '1px solid #ccc';
+    searchBox.style.display = 'block';
+    searchBox.style.margin = '0 auto';
+
+    document.querySelector('.blogs-section').prepend(searchBox);
+
+    searchBox.addEventListener('input', () => {
+        const query = searchBox.value.toLowerCase();
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        blogCards.forEach(card => {
+            const title = card.querySelector('h3').innerText.toLowerCase();
+            const description = card.querySelector('p').innerText.toLowerCase();
+            if (title.includes(query) || description.includes(query)) {
+                card.style.display = 'inline-block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+<style>
+    body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f8f886;
+}
+
+.header {
+    position: relative;
+    height: 100vh;
+    background: url('image/37.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    color: white;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: red;
+}
+
+.logo span {
+    color: red;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.blom{
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 1.2em;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    margin-left: 171px;
+
+}
+.blom:hover {
+    transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .blom::before, .blom::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: -100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    .blom:hover::before {
+        left: 100%;
+    }
+.btn {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.2em;
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.blogs-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.blog-card {
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    background: rgba(255, 255, 255, 0.521);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+}
+
+.blog-card img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.blog-card h3 {
+    padding: 10px 15px;
+    font-size: 1.5em;
+}
+
+.blog-card p {
+    padding: 0 15px 15px;
+    font-size: 1em;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222;
+    color: white;
+}
+
+footer p {
+    margin: 0;
+}
+
+</style>
+<body>
+    <header class="header">
+        <div class="overlay">
+            <nav class="navbar">
+                <a href="Blog page.html" class="logo">Blog<span>Site</span></a>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Blog page.html">Blogs</a></li>
+                    <li><a href="2 blog website about page.html">About</a></li>
+                    <li><a href="4 contant page.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hero-content">
+                <h1>Welcome to BlogSite</h1>
+                <p>Explore inspiring blogs, tips, and stories.</p>
+                <br>
+                <a href="#blogs" class="blom">Read Blogs</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="blogs" class="blogs-section">
+        <div class="blog-card">
+            <img src="image/(13).jpg" alt="Mind Power">
+            <h3>The Power of the Mind: Unlock Your Potential</h3>
+            <p>Learn how to harness the power of your mind to achieve personal growth...</p>
+            <a href="#" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/(10).jpg" alt="Silence Power">
+            <h3>The Power of Silence: Finding Peace Within</h3>
+            <p>Embrace the power of silence to bring clarity and peace into your life...</p>
+            <a href="#" class="btn">Read More</a>
+        </div>
+        <div class="blog-card">
+            <img src="image/money.PNG" alt="Blog 2">
+            <h3>The Psycology Of Money</h3>
+            <p>This book teach you the power and use of Money....</p>
+            <a href="Book/The Psychology of Money by Morgan - Emedicodiary.pdf" class="btn">Read More</a>
+        </div>
+    <div class="blog-card">
+        <img src="image/power.PNG" alt="Blog 2"  >
+        <h3>The 48 Laws Of Power</h3>
+        <p>This book teach you how to act to other people....</p>
+        <a href="Book/The+48+Laws+Of+Power.pdf" class="btn">Read More</a>
+    </div>
+    <div class="blog-card">
+        <img src="image/website.jpg" alt="Blog 2"  >
+        <h3>The Webdevelopment course Pdf</h3>
+        <p>The Book Teach You Full Html And CSS and well make you own Website</p>
+        <a href="Css and Html.html" class="btn">Read More</a>
+    </div>
+    <div class="blog-card">
+        <img src="image/webdevelopment.jpg" alt="Blog 2" >
+        <h3>The Future of Web Development</h3>
+        <p>Explore upcoming trends in web technologies...</p>
+        <a href="post.html" class="btn">Read More</a>
+    </div>
+    </section>
+
+    <footer>
+        <p>© 2024 BlogSite. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
